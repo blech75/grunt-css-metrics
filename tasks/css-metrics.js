@@ -30,11 +30,22 @@ module.exports = function (grunt) {
 
                     grunt.log.subhead('Metrics for ' + path);
 
-                    grunt.log.ok(['Total rules: ' + stats.rules]);
+                    grunt.log.ok(['Total rules: ' + stats.totalRules]);
                     grunt.log.ok(['Total selectors: ' + stats.totalSelectors]);
                     grunt.log.ok(['Average selectors per rule: ' + stats.averageSelectors]);
                     grunt.log.ok(['File size: ' + stats.fileSize]);
                     grunt.log.ok(['GZip size: ' + stats.gzipSize]);
+
+                    if(options.elementReport || options.selectorReport) {
+                        var cssReportPathPrefix = 'reports/' + path.replace(/\//g, '-');
+
+                        if(options.elementReport) {
+                            grunt.file.write(cssReportPathPrefix + '_elements.txt', stats.allElements);
+                        }
+                        if(options.selectorReport) {
+                            grunt.file.write(cssReportPathPrefix + '_selectors.txt', stats.allSelectors);
+                        }
+                    }
 
                     if(!options.quiet && options.maxSelectors && (stats.totalSelectors > options.maxSelectors)) {
                         grunt.fail.warn(path + ' exceeded maximum selector count');

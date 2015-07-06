@@ -23,9 +23,10 @@
     "test": "grunt"
   },
   "dependencies": {
-    "glob": "3.2.1",
     "css-parse": "~1.4.0",
-    "humanize": "~0.0.7"
+    "glob": "3.2.1",
+    "humanize": "~0.0.7",
+    "lodash": "^3.10.0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
